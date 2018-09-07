@@ -3,12 +3,18 @@ import constants from "./config/constants";
 import './config/database';
 import middlewareConfig from './config/middleware';
 import userRoutes from './modules';
+
 const app = express();
+
 middlewareConfig(app);
+
 app.get('/', (req, res) => {
-    res.send('Hellow');
+    res.send('apple bro new apple');
 });
+
+
 userRoutes(app);
+
 app.listen(constants.PORT, err => {
     if (err) {
         throw err;
