@@ -5,7 +5,7 @@ import { hashSync, compareSync } from 'bcrypt-nodejs';
 const UserSchema = new Schema({
   email: {
     type: String,
-    unique: true,
+    index: { unique: true },
     required: [true, 'Email is required!'],
     trim: true,
     validate: {
@@ -29,6 +29,8 @@ const UserSchema = new Schema({
     type: String,
     required: [true, 'UserName is required!'],
     trim: true,
+    index: { unique: true },
+
   },
   password: {
     type: String,
@@ -46,7 +48,7 @@ const UserSchema = new Schema({
 
 UserSchema.pre('save', function (next) {
   if (this.isModified('password')) {
-    this.password = thos._hashPassword(this.password);
+    this.password = this._hashPassword(this.password);
   }
   return next();
 })
