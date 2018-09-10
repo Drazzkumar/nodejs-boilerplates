@@ -1,7 +1,11 @@
 import mongoose, { Schema } from 'mongoose';
+import jwt from 'jsonwebtoken';
 import validator from 'validator';
-import { passwordReg } from './user.validations';
 import { hashSync, compareSync } from 'bcrypt-nodejs';
+
+import { passwordReg } from './user.validations';
+import constants from '../../config/constants';
+
 const UserSchema = new Schema({
   email: {
     type: String,
@@ -53,12 +57,28 @@ UserSchema.pre('save', function (next) {
   return next();
 })
 UserSchema.methods = {
+
+  // Hasing and varifying password
   _hashPassword(password) {
     return hashSync(password);
   },
   authenticateUser(password) {
     return compareSync(password, this.password);
-  }
-}
+  },
 
+  // jwt methods
+  createToken() {
+    return jwt.sign(
+      { _id: this._id },
+      constants.JWT_SECRET,
+    );
+  },
+  toJSON() {
+    return {
+      _id: this._id,
+      userName: this.userName,
+      token: `JWT ${this.createToken()}`,
+    };
+  },
+};
 export default mongoose.model("User", UserSchema);
