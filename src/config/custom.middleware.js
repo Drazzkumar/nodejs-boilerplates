@@ -7,4 +7,5 @@ export default function fixCORS(req, res, next) {
     req.header('Access-Control-Allow-Methods', "PUT,PATCH,POST,DELETE,GET");
     return res.status(200).json({})
   }
+  next();
 }

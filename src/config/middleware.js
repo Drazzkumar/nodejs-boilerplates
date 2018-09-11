@@ -17,6 +17,7 @@ export default app => {
   // body parser to take user input from the front end as json
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+
   app.use(fixCORS);
 
   // For login 
