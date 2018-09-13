@@ -1,28 +1,33 @@
 const devConfig = {
-  MONGO_URL: 'mongodb://localhost/boilderplate-dev',
-  JWT_SECRET: 'Thisisthesecretkey'
+  MONGO_URL: "mongodb://localhost/onpay-dev",
+  JWT_SECRET: "Thisisthesecretkey",
+  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
+  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm"
 };
 
 const testConfig = {
-  MONGO_URL: 'mongodb://localhost/boilderplate-test',
-  JWT_SECRET: 'Thisisthesecretkey'
+  MONGO_URL: "mongodb://localhost/onpay-test",
+  JWT_SECRET: "Thisisthesecretkey",
+  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
+  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm"
 };
 
 const prodConfig = {
-  MONGO_URL: 'mongodb://localhost/boilderplate-prod',
-  JWT_SECRET: 'Thisisthesecretkey'
+  MONGO_URL: "mongodb://localhost/onpay-prod",
+  JWT_SECRET: "Thisisthesecretkey",
+  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
+  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm"
 };
 
-
 const defaultConfig = {
-  PORT: process.env.PORT || 3000,
+  PORT: process.env.PORT || 3000
 };
 
 function envConfig(env) {
   switch (env) {
-    case 'development':
+    case "development":
       return devConfig;
-    case 'test':
+    case "test":
       return testConfig;
     default:
       return prodConfig;

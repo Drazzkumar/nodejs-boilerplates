@@ -1,8 +1,6 @@
-import userRoutes from './users/user.routes';
-import { authJwt } from '../services/auth/auth.services';
+import userRoutes from "./users/user.routes";
+import billingRoutes from "./stripe/billing.routes";
 export default app => {
-  app.use('/api/v1/users', userRoutes);
-  app.get('/hello', authJwt, (req, res) => {
-    res.send("This is secret route")
-  })
-}
+  app.use("/api/v1/users", userRoutes);
+  app.use("api/v1/strapi", billingRoutes);
+};
