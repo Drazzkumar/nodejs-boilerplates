@@ -25,6 +25,7 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
+    "stripe": "^6.10.0",
     "validator": "^10.7.1"
   },
   "devDependencies": {

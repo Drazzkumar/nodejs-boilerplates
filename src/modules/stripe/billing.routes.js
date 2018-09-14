@@ -1,9 +1,15 @@
 import { Router } from "express";
 import * as billingController from "./billing.controller";
-import authJWT from "../../services/auth/auth.services";
+import { authJwt } from "../../services/auth/auth.services";
 
 const routes = new Router();
 
-routes.post("/load", authJWT, billingController.loadAmount);
+routes.post("/load", authJwt, billingController.loadAmount);
+
+routes.get("/", authJwt, (req, res) =>
+  res.json({
+    MEssage: "You have passed the auth"
+  })
+);
 
 export default routes;

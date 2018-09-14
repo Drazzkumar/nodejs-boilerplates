@@ -23,3 +23,12 @@ export async function login(req, res, next) {
   res.status(200).json(req.user);
   return next();
 }
+export async function profile(req, res, next) {
+  let _id = req.user._id;
+  let user = User.findById(_id);
+  if(user  && user.length>0){
+    
+  }
+  res.status(200).json(req.user);
+  return next();
+}

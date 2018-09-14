@@ -35,7 +35,7 @@ const UserSchema = new Schema({
     trim: true,
     index: { unique: true }
   },
-  amount: {
+  credits: {
     type: Number,
     default: 0
   },
@@ -77,6 +77,7 @@ UserSchema.methods = {
     return {
       _id: this._id,
       userName: this.userName,
+      credits: this.credits,
       token: `JWT ${this.createToken()}`
     };
   }

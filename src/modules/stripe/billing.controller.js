@@ -14,7 +14,7 @@ export async function loadAmount(req, res) {
     source: req.body.id
   });
 
-  req.user.credits += 5;
+  req.user.credits += amount;
   const user = await req.user.save();
 
   res.send(req.user);
