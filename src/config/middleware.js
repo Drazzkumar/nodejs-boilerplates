@@ -1,13 +1,15 @@
-import morgan from 'morgan';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import helmet from 'helmet';
-import passport from 'passport';
-import fixCORS from './custom.middleware';
+import morgan from "morgan";
+import bodyParser from "body-parser";
+import compression from "compression";
+import helmet from "helmet";
+import passport from "passport";
+import fixCORS from "./custom.middleware";
+// import cookieSession from "cookie-session";
+// import constants from "../config/constants";
 // import { isPrimitive } from 'util';
 
-const isDev = process.env.NODE_ENV === 'development';
-const isProd = process.env.NODE_ENV === 'production';
+const isDev = process.env.NODE_ENV === "development";
+const isProd = process.env.NODE_ENV === "production";
 
 export default app => {
   if (isProd) {
@@ -20,10 +22,19 @@ export default app => {
 
   app.use(fixCORS);
 
-  // For login 
+  // For login
+  // app.use(
+  //   cookieSession({
+  //     maxAge: 30 * 24 * 60 * 60 * 1000,
+  //     keys: [constants.cookieKey]
+  //   })
+  // );
+
   app.use(passport.initialize());
 
+  // app.use(passport.session());
+
   if (isDev) {
-    app.use(morgan('dev'));
+    app.use(morgan("dev"));
   }
-}
+};

@@ -29,6 +29,11 @@ const UserSchema = new Schema({
     required: [true, "LastName is required!"],
     trim: true
   },
+  address: {
+    type: String,
+    required: [true, "LastName is required!"],
+    trim: true
+  },
   userName: {
     type: String,
     required: [true, "UserName is required!"],
@@ -39,6 +44,7 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
+
   password: {
     type: String,
     required: [true, "Password is required!"],
@@ -71,13 +77,20 @@ UserSchema.methods = {
 
   // jwt methods
   createToken() {
-    return jwt.sign({ _id: this._id }, constants.JWT_SECRET);
+    return jwt.sign({ _id: this._id }, constants.JWT_SECRET, {
+      expiresIn: 60 * 60
+    });
+  },
+  toAuthJSON() {
+    return {
+      credits: this.credits,
+      email: this.email,
+      userName: this.userName,
+      name: `${this.firstName} ${this.lastName}`
+    };
   },
   toJSON() {
     return {
-      _id: this._id,
-      userName: this.userName,
-      credits: this.credits,
       token: `JWT ${this.createToken()}`
     };
   }

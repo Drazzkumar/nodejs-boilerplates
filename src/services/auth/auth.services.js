@@ -1,46 +1,48 @@
-import passport from 'passport';
-import LocalStrategy from 'passport-local';
-import { Strategy as JWTStrategy, ExtractJwt } from 'passport-jwt';
-import User from '../../modules/users/user.model';
-import constants from '../../config/constants';
+import passport from "passport";
+import LocalStrategy from "passport-local";
+import { Strategy as JWTStrategy, ExtractJwt } from "passport-jwt";
+import User from "../../modules/users/user.model";
+import constants from "../../config/constants";
 
 const localOptions = {
-  usernameField: 'email'
-}
+  usernameField: "email"
+};
 
-const localStrategy = new LocalStrategy(localOptions, async (email, password, done) => {
-  try {
-    const user = await User.findOne({ email });
-    if (!user) {
-      return done(null, false, { message: "Incorrect email" });
-    } else if (!user.authenticateUser(password)) {
-      return done(null, false, { message: "Incorrect password" });
+const localStrategy = new LocalStrategy(
+  localOptions,
+  async (email, password, done) => {
+    try {
+      const user = await User.findOne({ email });
+      if (!user) {
+        return done(null, false, { message: "Incorrect email" });
+      } else if (!user.authenticateUser(password)) {
+        return done(null, false, { message: "Incorrect password" });
+      }
+      return done(false, user);
+    } catch (e) {
+      return done(e, false);
     }
-    return done(false, user);
-  } catch (e) {
-    return done(e, false);
   }
-});
+);
 
 // jwt strategy
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderWithScheme("JWT"),
-  secretOrKey: constants.JWT_SECRET,
+  secretOrKey: constants.JWT_SECRET
 };
 
 const jwtStrategy = new JWTStrategy(jwtOptions, async (payload, done) => {
-  console.log("payload", payload)
   try {
     // Identify user by ID,
     const user = await User.findById(payload._id);
     if (!user) {
       return done(null, false);
     }
-    return done(null, user)
+    return done(null, user);
   } catch (e) {
     return done(e, false);
   }
-})
+});
 
 //using different strategy
 
@@ -48,5 +50,7 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 // exporting
-export const authLocal = passport.authenticate('local', { session: false })
-export const authJwt = passport.authenticate('jwt', { session: false })
+export const authLocal = passport.authenticate("local", {
+  session: false
+});
+export const authJwt = passport.authenticate("jwt", { session: false });
