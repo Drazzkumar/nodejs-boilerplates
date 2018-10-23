@@ -11,12 +11,13 @@ middlewareConfig(app);
 userRoutes(app);
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static("public/"));
+  app.use(express.static(path.resolve(__dirname, "public")));
   app.get("*", (req, res) => {
     const dir = path.resolve(__dirname, "public", "index.html");
     res.sendFile(dir);
   });
 }
+
 app.listen(constants.PORT, err => {
   if (err) {
     throw err;
@@ -26,6 +27,8 @@ app.listen(constants.PORT, err => {
 
             ----Running on ${process.env.NODE_ENV}
             
-            ----Make something great!`);
+            ----Make something great!!!
+                  
+            `);
   }
 });
