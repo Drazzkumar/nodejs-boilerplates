@@ -44,6 +44,10 @@ const UserSchema = new Schema({
     type: Number,
     default: 0
   },
+  joinAt: {
+    type: Date,
+    default: Date.now
+  },
 
   password: {
     type: String,
@@ -87,6 +91,12 @@ UserSchema.methods = {
       email: this.email,
       userName: this.userName,
       name: `${this.firstName} ${this.lastName}`
+    };
+  },
+  toReceiverJSON() {
+    return {
+      id: this.id,
+      receiver: `${this.firstName} ${this.lastName}`
     };
   },
   toJSON() {

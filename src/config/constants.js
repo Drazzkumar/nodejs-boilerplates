@@ -1,25 +1,16 @@
 const devConfig = {
   MONGO_URL: "mongodb://localhost/onpay-dev",
-  JWT_SECRET: "Thisisthesecretkey",
-  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
-  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm",
-  cookieKey: "thisisthecookeikey"
+  JWT_SECRET: "Thisisthesecretkey"
 };
 
 const testConfig = {
   MONGO_URL: "mongodb://localhost/onpay-test",
-  JWT_SECRET: "Thisisthesecretkey",
-  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
-  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm",
-  cookieKey: "thisisthecookeikey"
+  JWT_SECRET: "Thisisthesecretkey"
 };
 
 const prodConfig = {
-  MONGO_URL: "mongodb://localhost/onpay",
-  JWT_SECRET: "Thisisthesecretkey",
-  STRIPE_PUBLISHABLE_KEY: "pk_test_z34mJEdLgXQ7VUc51TggIrYQ",
-  STRIPE_SECRET_KEY: "sk_test_YuNQTGQe4MT507sHK3yV1Gvm",
-  cookieKey: "thisisthecookeikey"
+  MONGO_URL: "mongodb://razz:onpay04@ds219832.mlab.com:19832/onpay",
+  JWT_SECRET: "Thisisthesecretkey"
 };
 
 const defaultConfig = {
