@@ -5,10 +5,14 @@
   "main": "index.js",
   "author": "raj kumar rai danuwar",
   "license": "MIT",
+  "engines": {
+    "node": "10.6.0",
+    "yarn": "*"
+  },
   "scripts": {
-    "clean": "rimraf dist",
     "dev:build": "yarn run clean && webpack -w --mode=development",
-    "build": "yarn run clean && webpack -w --mode=production",
+    "build": "webpack --mode=production",
+    "start": "yarn build && node  dist/index.bundle.js",
     "dev": "cross-env NODE_ENV=development nodemon  dist/index.bundle.js"
   },
   "dependencies": {
